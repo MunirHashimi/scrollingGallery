@@ -1,17 +1,21 @@
-  let scroll = document.querySelector(".gallery");
-        let backBtn = document.querySelector("#backBtn");
-        let nextBtn = document.querySelector("#nextBtn");
 
-        scroll.addEventListener("wheel", (evt)=>{
-            evt.preventDefault();
-            scroll.scrollLeft += evt.deltaY;
-            scroll.style.scrollBehavior = "auto";
+    const gallery = document.querySelector(".gallery div"); // image wrapper
+    const image = gallery.querySelector("img"); // one image
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    // Scroll one image width at a time
+    backBtn.addEventListener("click", () => {
+        gallery.parentElement.scrollBy({
+            left: -image.clientWidth - 20, // 20 = gap between images
+            behavior: "smooth"
         });
-        nextBtn.addEventListener("click", ()=>{
-            scroll.style.scrollBehavior = "smooth";
-            scroll.scrollLeft += 900;
+    });
+
+    nextBtn.addEventListener("click", () => {
+        gallery.parentElement.scrollBy({
+            left: image.clientWidth + 20,
+            behavior: "smooth"
         });
-        backBtn.addEventListener("click", ()=>{
-            scroll.style.scrollBehavior = "smooth";
-            scroll.scrollLeft -= 900;
-        });
+    });
+

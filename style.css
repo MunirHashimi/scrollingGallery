@@ -14,14 +14,14 @@ body {
     align-items: center;
     justify-content: center;
     margin: 10% auto;
-    padding: 0 10px;
-    flex-wrap: wrap;
+    gap: 20px;
 }
 
-#backBtn, #nextBtn {
+#backBtn,
+#nextBtn {
     width: 50px;
     height: 50px;
-    margin: 20px;
+    margin: 40px;
     background: linear-gradient(135deg, #4f46e5, #3b82f6);
     border-radius: 50%;
     display: flex;
@@ -34,7 +34,8 @@ body {
     border: none;
 }
 
-#backBtn:hover, #nextBtn:hover {
+#backBtn:hover,
+#nextBtn:hover {
     transform: scale(1.1);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     background: linear-gradient(135deg, #6366f1, #60a5fa);
@@ -42,22 +43,18 @@ body {
 }
 
 .gallery {
-    width: 90%;
-    max-width: 1000px;
+    width: 900px;
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-}
-
-.gallery::-webkit-scrollbar {
-    display: none;
 }
 
 .gallery div {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
     padding: 10px;
     flex: none;
 }
@@ -65,41 +62,52 @@ body {
 .gallery div img {
     width: 100%;
     filter: grayscale(100%);
+    scroll-snap-align: center;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .gallery div img:hover {
-    filter: grayscale(0%);
+    filter: grayscale(0);
     cursor: pointer;
     transform: scale(1.1);
 }
 
-/* Tablet View */
-@media (max-width: 768px) {
-    .gallery div {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    #backBtn, #nextBtn {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        margin: 15px;
-    }
+.gallery::-webkit-scrollbar {
+    display: none;
 }
 
-/* Mobile View */
-@media (max-width: 480px) {
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .gallery-wrap {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px;
+    }
+
+    .gallery {
+        max-width: 80vw;
+    }
+
     .gallery div {
-        grid-template-columns: repeat(1, 1fr);
+        display: flex;
+        flex-direction: row;
+        padding: 0;
         gap: 10px;
     }
 
-    #backBtn, #nextBtn {
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
-        margin: 10px;
+    .gallery div img {
+        flex: 0 0 100%;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    #backBtn,
+    #nextBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        margin: 0;
     }
 }
